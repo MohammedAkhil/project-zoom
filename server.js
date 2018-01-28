@@ -8,18 +8,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/recordings',index);
 
+// Express only serves static assets in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://<YOUR-APP-NAME>.herokuapp.com");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
 next(err);
 });
-
-// Express only serves static assets in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-}
-
 
 // error handler
 app.use(function(err, req, res, next) {
