@@ -8,21 +8,18 @@ let client_io;
 io.listen(port_io);
 
 console.log('listening on port.io', port_io);
-console.log(io);
 io.on('connection', (client) => {
     client_io = client;
     client.on('subscribe', (interval) => {
         console.log('client is subscribing to api');
         getRecordings('a')
         .then(data => {
-            console.log(client_io);
-            client_io.emit('recording', data.meetings);
+            client.emit('recording', data.meetings);
         })
         .catch(error => {
             console.log(error);
         });
     });
-    
 });
 
 /* GET test page. */
@@ -48,6 +45,10 @@ router.post('/', function(req, res, next) {
         });
     }
 });
+
+router.get('/load', (req, res, next) => {
+
+})
 
 const getRecordings = user_id => {
     const url = `https://api.zoom.us/v2/users/bxffJu2QT1CckvCzNgbx4A/recordings?from=2018-01-24&to=2018-01-27`;

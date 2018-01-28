@@ -11,10 +11,11 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+    alert('alert')
     subscribeToApi((err, recordings) => {
       this.setState({recordings: recordings, is_loading: false});
     });
-}
+  }
 
   state = {
     recordings: [],
