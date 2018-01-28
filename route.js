@@ -8,6 +8,7 @@ let client_io;
 io.listen(port_io);
 
 console.log('listening on port.io', port_io);
+console.log(io);
 io.on('connection', (client) => {
     client_io = client;
     client.on('subscribe', (interval) => {
