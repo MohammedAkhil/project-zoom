@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+#visible {
+  position: absolute;
+  visibility: visible;
+  left: 600px;
+  top: 300px;
+  z-index: 200;
+  height: 80px;
+  size: 5cm
+}
+
